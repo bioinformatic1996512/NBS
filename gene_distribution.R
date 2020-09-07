@@ -1,0 +1,11 @@
+pdf(file='c:/Users/dog/Desktop/pear_location.pdf')
+map <- read.table("c:/Users/dog/Desktop/gene_location.txt")
+chr_len<-read.table('c:/Users/dog/Desktop/Chr_length.txt')
+par(mar=c(5,5,1,1),family="serif",font=2,cex.lab=1.5,cex.axis=1,cex.axis=1.5)
+plot(map$V1,map$V2,col=map$V3,pch=95,axes=F,xlab="Chromosome number",ylab="Chromosome length (Mb)",type="n",cex=1.2,cex.lab=1.5,ylim=c(-1,50))
+for (i in 1:17){y1<-chr_len$V2[chr_len$V1==i];n<-length(y1);lines(rep(i,n),y1,lwd=25,col='#CDCDCD')}
+segments(map$V1-0.3,map$V2+0.1,map$V1+0.3,map$V2+0.1,lwd=2,col=map$V3)
+axis(side=1,at=0:17,tick=-0.1,lwd=2,labels=0:17)
+axis(side=2,at=c(0,seq(0,220,10)),tick=-0.1,labels=c("",seq(0,221,10)),lwd=2,cex.lab = 3)
+legend("topleft", inset=.05, title="NBS Type"=1, c('CC-NBS','CC-NBS-LRR','NBS','NBS-LRR','TIR-CC-NBS','TIR-CC-NBS-LRR','TIR-NBS','TIR-NBS-LRR'), col=c("red", "green",'blue','yellow','pink','gray','purple','black'))
+dev.off()
